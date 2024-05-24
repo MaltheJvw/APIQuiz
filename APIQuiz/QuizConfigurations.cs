@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace APIQuiz
 {
@@ -51,11 +52,12 @@ namespace APIQuiz
         public string GetLimit()
         {
             int limit = 0;
-            Console.SetCursorPosition(0, 10);
-            Console.WriteLine("How many Questions: ");
+
+            consoleManager.WriteLine("How many Questions: ", 2);
 
             limit = Convert.ToInt32(Console.ReadLine());
-            Console.SetCursorPosition(15, 0);
+            Console.SetCursorPosition(5, 0);
+            consoleManager.WriteColoredLine("Questions: ", limit, "", ConsoleColor.Green, 0);
             Console.Write("Questions: ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(limit);
@@ -66,6 +68,9 @@ namespace APIQuiz
 
         public string GetCategory()
         {
+            Console.SetCursorPosition(0, 1);
+            Console.Write("What language: ");
+
             string[] menuItems = { "Code", "Linux", "DevOps", "Networking", "SQL", "(f)Cloud", "Docker", "Kubernetes", "CMS" };
             int selectedIndex = 0;
             ConsoleKey key;
@@ -96,6 +101,7 @@ namespace APIQuiz
             string category = menuItems[selectedIndex];
 
             consoleManager.ClearMenu();
+            consoleManager.WriteColoredLine("Category: ", category, "", ConsoleColor.Green, 0);
 
             return category;
         }
@@ -104,6 +110,7 @@ namespace APIQuiz
 
         public void Menu(string[] menuItems, int selectedIndex)
         {
+            Console.SetCursorPosition(4, 4);
             for (int i = 0; i < menuItems.Length; i++)
             {
                 consoleManager.AddMenuLine(i);
