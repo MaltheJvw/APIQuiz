@@ -1,6 +1,7 @@
 ﻿using APIQuiz;
 
 
+
 QuizConfigurations configs = new QuizConfigurations();
 string getCategory = configs.GetCategory().ToString();
 

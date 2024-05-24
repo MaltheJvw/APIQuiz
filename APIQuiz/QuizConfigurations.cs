@@ -8,7 +8,7 @@ namespace APIQuiz
 {
     internal class QuizConfigurations
     {
-
+        ConsoleManager consoleManager = new ConsoleManager();
         public string GetDifficulty()
         {
             string[] menuItems = { "Easy", "Medium", "Hard" };
@@ -94,12 +94,8 @@ namespace APIQuiz
             Console.Clear();
 
             string category = menuItems[selectedIndex];
-            Console.SetCursorPosition(0, 0);
-            Console.Write("Category: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(category);
-            Console.ResetColor();
 
+            consoleManager.ClearMenu();
 
             return category;
         }
@@ -108,20 +104,18 @@ namespace APIQuiz
 
         public void Menu(string[] menuItems, int selectedIndex)
         {
-
-
-            Console.SetCursorPosition(0, 4);
             for (int i = 0; i < menuItems.Length; i++)
             {
+                consoleManager.AddMenuLine(i);
+
                 if (i == selectedIndex)
                 {
-                    Console.Write("-> ");
+                    consoleManager.WriteLine("-> " + menuItems[i], i);
                 }
                 else
                 {
-                    Console.Write("   ");
+                    consoleManager.WriteLine("   " + menuItems[i], i);
                 }
-                Console.WriteLine(menuItems[i]);
             }
         }
     }
