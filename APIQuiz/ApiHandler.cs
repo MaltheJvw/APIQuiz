@@ -43,7 +43,7 @@ namespace APIQuiz
 
         {
            
-            Console.WriteLine($"Kategori: [{category}] Antal spørgsmål: [{limit}] Sværhedsgrad: [{difficulty}]");
+            Console.WriteLine($"Category: [{category}] Antal Questions: [{limit}] Difficulty: [{difficulty}]");
 
             // Convert the response to a list of Format objects by deserializing the JSON-response
 
