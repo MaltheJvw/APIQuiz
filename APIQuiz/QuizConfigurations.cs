@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -9,7 +10,6 @@ namespace APIQuiz
 {
     internal class QuizConfigurations
     {
-
         public string GetDifficulty()
         {
             string[] menuItems = { "Easy", "Medium", "Hard" };
@@ -85,58 +85,56 @@ namespace APIQuiz
         public string GetCategory()
         {
             string[] menuItems = { "Code", "Linux", "DevOps", "Networking", "SQL", "(f)Cloud", "Docker", "Kubernetes", "CMS" };
-            int selectedIndex = 0;
-            ConsoleKey key;
-
             Console.CursorVisible = false;
             Console.SetCursorPosition(0, 0);
             Console.Write("Category: ");
 
-            Menu(menuItems, selectedIndex);
+            string choice = Menu(menuItems);
 
-            do
-            {
-                key = Console.ReadKey(true).Key;
-
-                if (key == ConsoleKey.UpArrow)
-                {
-                    selectedIndex = (selectedIndex == 0) ? menuItems.Length - 1 : selectedIndex - 1;
-                }
-                else if (key == ConsoleKey.DownArrow)
-                {
-                    selectedIndex = (selectedIndex == menuItems.Length - 1) ? 0 : selectedIndex + 1;
-                }
-
-                // Redraw the menu with the new selected index
-                Menu(menuItems, selectedIndex);
-            } while (key != ConsoleKey.Enter);
-            Console.Clear();
-            
-            string category = menuItems[selectedIndex];
-
-            Console.Clear();
-            return category;
+            return choice;
         }
 
 
 
-        public void Menu(string[] menuItems, int selectedIndex)
+        public string Menu(string[] menuItems)
         {
 
+            
+            int selectedIndex = 0;
 
-            Console.SetCursorPosition(0,1);
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-                if (i == selectedIndex)
+            
+                Console.SetCursorPosition(0, 1);
+
+
+                ConsoleKey key;
+                do
                 {
-                    Console.Write("-> ");
-                }
-                else
-                {
-                    Console.Write("   ");
-                }
-                Console.WriteLine(menuItems[i]);
-            }
+                    key = Console.ReadKey(true).Key;
+
+                    if (key == ConsoleKey.UpArrow)
+                    {
+                        selectedIndex = (selectedIndex == 0) ? menuItems.Length - 1 : selectedIndex - 1;
+                    }
+                    else if (key == ConsoleKey.DownArrow)
+                    {
+                        selectedIndex = (selectedIndex == menuItems.Length - 1) ? 0 : selectedIndex + 1;
+                    }
+                    for (int i = 0; i < menuItems.Length; i++)
+                    {
+                        if (i == selectedIndex)
+                        {
+                            Console.Write("-> ");
+                        }
+                        else
+                        {
+                            Console.Write("   ");
+                        }
+                        Console.WriteLine(menuItems[i]);
+                    }
+
+                } while (key != ConsoleKey.Enter);
+            string choice = menuItems[selectedIndex];
+            return choice;
         }
     }
 }

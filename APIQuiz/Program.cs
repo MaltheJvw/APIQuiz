@@ -1,10 +1,7 @@
 ﻿using APIQuiz;
 
-
-
 QuizConfigurations configs = new QuizConfigurations();
 string getCategory = configs.GetCategory().ToString();
-
 string getLimit = configs.GetLimit().ToString();
 string getDifficulty = configs.GetDifficulty().ToString();
 
@@ -45,7 +42,7 @@ static void DisplayQuestion(Format question)
     {
         if (!string.IsNullOrEmpty(answer.Value))
         {
-            Console.WriteLine($"{answer.Key.Last()}. {answer.Value}"); // Display the actual answer value
+            Console.WriteLine($"{answer.Key.Last()}. {answer.Value}");
         }
     }
 
